@@ -160,72 +160,55 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="group"
-        options={{
-          title: 'Group',
-          tabBarIcon: ({ focused }) => (
-            <View style={{ 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              position: 'relative' 
-            }}>
-              {focused ? (icons.groupColor ? (
-                <View style={{
-                  backgroundColor: '#8B5CF6',
-                  borderRadius: 8,
-                  padding: 8,
-                  position: 'relative',
-                }}>
-                  <SvgXml 
-                    xml={icons.groupColor} 
-                    width={24} 
-                    height={24} 
-                  />
-                  <View style={{
-                    position: 'absolute',
-                    bottom: -6,
-                    left: '50%',
-                    marginLeft: -15,
-                    backgroundColor: '#8B5CF6',
-                    paddingHorizontal: 6,
-                    paddingVertical: 2,
-                    borderRadius: 4,
-                  }}>
-                    <Text style={{ 
-                      color: '#fff', 
-                      fontSize: 10, 
-                      fontWeight: 'bold' 
-                    }}>
-                      28 × 27.03
-                    </Text>
-                  </View>
-                </View>
-              ) : (
-                <View style={{ 
-                  width: 28, 
-                  height: 28, 
-                  backgroundColor: '#f0f0f0', 
-                  borderRadius: 4 
-                }} />
-              )) : (icons.group ? (
-                <SvgXml 
-                  xml={icons.group} 
-                  width={28} 
-                  height={28} 
-                  color="#999"
-                />
-              ) : (
-                <View style={{ 
-                  width: 28, 
-                  height: 28, 
-                  backgroundColor: '#f0f0f0', 
-                  borderRadius: 4 
-                }} />
-              ))}
-            </View>
-          ),
-        }}
-      />
+  name="group"
+  options={{
+    title: 'Group',
+    tabBarIcon: ({ focused }) => (
+      <View style={{ alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+        {focused ? (
+          icons.groupColor ? (
+            <SvgXml xml={icons.groupColor} width={28} height={28} />
+          ) : (
+            <View
+              style={{
+                width: 28,
+                height: 28,
+                backgroundColor: '#f0f0f0',
+                borderRadius: 4,
+              }}
+            />
+          )
+        ) : icons.group ? (
+          <SvgXml xml={icons.group} width={28} height={28} />
+        ) : (
+          <View
+            style={{
+              width: 28,
+              height: 28,
+              backgroundColor: '#f0f0f0',
+              borderRadius: 4,
+            }}
+          />
+        )}
+
+        {/* Green dot indicator like Home */}
+        {focused && (
+          <View
+            style={{
+              position: 'absolute',
+              bottom: -12,
+              width: 4,
+              height: 4,
+              borderRadius: 2,
+              backgroundColor: '#4CAF50',
+            }}
+          />
+        )}
+      </View>
+    ),
+  }}
+/>
+
 
       <Tabs.Screen
         name="create"

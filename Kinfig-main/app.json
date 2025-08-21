@@ -27,6 +27,12 @@
     },
     "android": {
       "package": "com.anonymous.kinfigapp"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "27815af3-5cbb-4bb1-a443-08a9bc4b012d"
+      }
     }
   }
 }

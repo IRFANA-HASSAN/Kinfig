@@ -713,13 +713,31 @@ export default function HomeScreen() {
             <TouchableOpacity onPress={() => openMenu(item.id)}>
               <MoreHorizontal size={20} color="#666" style={{ transform: [{ rotate: '90deg' }] }} />
             </TouchableOpacity>
-            {menuVisible === item.id && (
-              <View style={{ position: 'absolute', top: 28, right: 0, backgroundColor: '#fff', borderRadius: 8, elevation: 4, zIndex: 100 }}>
-                <TouchableOpacity onPress={() => handleReport(postUser)}>
-                  <Text style={{ padding: 12, color: '#ff3040', fontWeight: 'bold' }}>Report</Text>
-                </TouchableOpacity>
-              </View>
-            )}
+            <View style={{
+              backgroundColor: '#fff',
+              borderRadius: 8,
+              minWidth: 120,
+              elevation: 8,
+              position: 'absolute',
+              top: 30,
+              right: 0,
+              zIndex: 1000,
+              display: menuVisible === item.id ? 'flex' : 'none',
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 2 },
+            }}>
+              <TouchableOpacity
+                onPress={() => {
+                  const post = posts.find(p => p.id === menuVisible);
+                  const postUser = post ? users.find(u => u.id === post.userId) : null;
+                  if (postUser) handleReport(postUser);
+                }}
+              >
+                <Text style={{ padding: 16, color: '#ff3040', fontWeight: 'bold' }}>Report</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         {item.images?.length > 0 && (
@@ -1269,7 +1287,50 @@ export default function HomeScreen() {
         </View>
       </Modal>
 
-      <Modal visible={reportModal.visible} transparent animationType="fade">
+      {/*<Modal
+        visible={!!menuVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={closeMenu}
+      >
+        <TouchableWithoutFeedback onPress={closeMenu}>
+          <View style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
+            <View style={{
+              backgroundColor: '#fff',
+              borderRadius: 8,
+              margin: 24,
+              minWidth: 120,
+              elevation: 8,
+              shadowColor: '#000',
+              shadowOpacity: 0.2,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 2 },
+            }}>
+              <TouchableOpacity
+                onPress={() => {
+                  const post = posts.find(p => p.id === menuVisible);
+                  const postUser = post ? users.find(u => u.id === post.userId) : null;
+                  if (postUser) handleReport(postUser);
+                }}
+              >
+                <Text style={{ padding: 16, color: '#ff3040', fontWeight: 'bold' }}>Report</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>*/}
+
+      {/* Report Modal */}
+      <Modal
+        visible={reportModal.visible}
+        transparent
+        animationType="fade"
+      >
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.4)' }}>
           <View style={{ backgroundColor: '#fff', padding: 24, borderRadius: 12, alignItems: 'center' }}>
             <Text style={{ fontSize: 16, marginBottom: 12 }}>
@@ -1620,7 +1681,7 @@ const styles = StyleSheet.create({
   },
   storyNavRight: {
     position: 'absolute',
-    right: 0,
+       right: 0,
     top: 0,
     bottom: 0,
     width: '30%',
